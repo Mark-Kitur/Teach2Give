@@ -2,27 +2,21 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int countVowels(char str[]) {
-    int count = 0;
-    char vowels[] = "aeiouAEIOU"; 
-    int i = 0;
+int countWords(char str[]) {
+    int count = 0, i = 0;
 
     while (str[i] != '\0') {
-        for (int j = 0; vowels[j] != '\0'; j++) {
-            if (str[i] == vowels[j]) {
-                count++;
-                break;
-            }
+        if (!isspace(str[i]) && (i == 0 || isspace(str[i - 1]))) {
+            count++;
         }
         i++;
     }
     return count;
 }
-
 int main() {
-    char str[100];
+    char str[200];
     printf("Enter a sentence: ");
     fgets(str, sizeof(str), stdin); 
-    printf("Vowel count: %d\n", countVowels(str));
+    printf("Word count: %d\n", countWords(str));
     return 0;
 }
